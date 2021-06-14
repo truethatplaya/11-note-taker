@@ -1,6 +1,7 @@
 const express = require("express");
 const path = require("path");
 const fs = require("fs");
+const generateUniqueId = require("generate-unique-id");
 
 const app = express();
 const PORT = process.env.PORT || 8000;
@@ -22,9 +23,15 @@ app.get("/api/notes", function (req, res) {
   res.sendFile(path.join(__dirname, "/Develop/db/db.json"));
 });
 
-app.post("/api/notes", function (req, res) {});
-
-//* POST = create
+app.post("/api/notes", function (req, res) {
+  console.log("You made it! Yay!");
+  const note = req.body;
+  note.id = generateUniqueId({
+    length: 4,
+    useLetters: false,
+  });
+  console.log(note);
+});
 
 app.listen(PORT, () => {
   console.log(`App listening on PORT: ${PORT}`);
