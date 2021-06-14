@@ -18,16 +18,13 @@ app.get("/notes", function (req, res) {
   res.sendFile(path.join(__dirname, "/Develop/public/notes.html"));
 });
 
-app.get("/notes", function (req, res) {
-  res.send("/Develop/public/notes.html");
+app.get("/api/notes", function (req, res) {
+  res.sendFile(path.join(__dirname, "/Develop/db/db.json"));
 });
 
-// ROUTER
-// The below points our server to a series of "route" files.
-// These routes give our server a "map" of how to respond when users visit or request data from various URLs.
-// require("./startup/prod")(app);
-// require("./assets/index.html")(app);
-// require("./assets/notes.html")(app);
+app.post("/api/notes", function (req, res) {});
+
+//* POST = create
 
 app.listen(PORT, () => {
   console.log(`App listening on PORT: ${PORT}`);

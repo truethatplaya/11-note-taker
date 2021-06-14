@@ -6,6 +6,7 @@
   "dependencies": {
     "compression": "^1.7.4",
     "express": "^4.17.1",
+    "generate-unique-id": "^2.0.1",
     "helmet": "^4.6.0",
     "path": "^0.12.7"
   },
