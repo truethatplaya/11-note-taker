@@ -1,7 +1,13 @@
 const express = require("express");
-const app = express();
+const path = require("path");
+const fs = require("fs");
 
-const PORT = process.env.PORT || 3001;
+const app = express();
+const PORT = process.env.PORT || 8000;
+
+app.get("/", function (req, res) {
+  res.send("Hello World");
+});
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -9,9 +15,9 @@ app.use(express.json());
 // ROUTER
 // The below points our server to a series of "route" files.
 // These routes give our server a "map" of how to respond when users visit or request data from various URLs.
-require("./startup/prod")(app);
-require("./assets/index.html")(app);
-require("./assets/notes.html")(app);
+// require("./startup/prod")(app);
+// require("./assets/index.html")(app);
+// require("./assets/notes.html")(app);
 
 app.listen(PORT, () => {
   console.log(`App listening on PORT: ${PORT}`);
