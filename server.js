@@ -5,12 +5,22 @@ const fs = require("fs");
 const app = express();
 const PORT = process.env.PORT || 8000;
 
-app.get("/", function (req, res) {
-  res.send("Hello World");
-});
-
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(express.static(__dirname + "/Develop/public/"));
+
+//* / is equal to home page then /....
+app.get("/", function (req, res) {
+  res.sendFile(path.join(__dirname, "/Develop/public/index.html"));
+});
+
+app.get("/notes", function (req, res) {
+  res.sendFile(path.join(__dirname, "/Develop/public/notes.html"));
+});
+
+app.get("/notes", function (req, res) {
+  res.send("/Develop/public/notes.html");
+});
 
 // ROUTER
 // The below points our server to a series of "route" files.
