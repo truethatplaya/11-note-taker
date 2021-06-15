@@ -8,19 +8,19 @@ const PORT = process.env.PORT || 8000;
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(express.static(__dirname + "/Develop/public/"));
+app.use(express.static(__dirname + "/public/"));
 
 //* / is equal to home page then /....
 app.get("/", function (req, res) {
-  res.sendFile(path.join(__dirname, "/Develop/public/index.html"));
+  res.sendFile(path.join(__dirname, "/public/index.html"));
 });
 
 app.get("/notes", function (req, res) {
-  res.sendFile(path.join(__dirname, "/Develop/public/notes.html"));
+  res.sendFile(path.join(__dirname, "/public/notes.html"));
 });
 
 app.get("/api/notes", function (req, res) {
-  res.sendFile(path.join(__dirname, "/Develop/db/db.json"));
+  res.sendFile(path.join(__dirname, "/db/db.json"));
 });
 
 app.post("/api/notes", function (req, res) {
@@ -31,17 +31,13 @@ app.post("/api/notes", function (req, res) {
     useLetters: false,
   });
   console.log(note);
-  fs.readFile("./Develop/db/db.json", "utf-8", function (err, data) {
+  fs.readFile("./db/db.json", "utf-8", function (err, data) {
     if (err) throw err;
     const noteData = JSON.parse(data);
     noteData.push(note);
-    fs.writeFile(
-      "./Develop/db/db.json",
-      JSON.stringify(noteData),
-      function (err) {
-        if (err) throw err;
-      }
-    );
+    fs.writeFile("./db/db.json", JSON.stringify(noteData), function (err) {
+      if (err) throw err;
+    });
     console.log(noteData);
   });
   res.json(note);
