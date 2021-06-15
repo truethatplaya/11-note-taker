@@ -31,6 +31,20 @@ app.post("/api/notes", function (req, res) {
     useLetters: false,
   });
   console.log(note);
+  fs.readFile("./Develop/db/db.json", "utf-8", function (err, data) {
+    if (err) throw err;
+    const noteData = JSON.parse(data);
+    noteData.push(note);
+    fs.writeFile(
+      "./Develop/db/db.json",
+      JSON.stringify(noteData),
+      function (err) {
+        if (err) throw err;
+      }
+    );
+    console.log(noteData);
+  });
+  res.json(note);
 });
 
 app.listen(PORT, () => {
